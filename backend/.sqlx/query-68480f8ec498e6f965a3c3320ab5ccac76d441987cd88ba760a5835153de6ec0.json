@@ -1,0 +1,58 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT id, course_id, block_type, week_day, start_time, end_time, location\n        FROM blocks\n        WHERE user_id = $1\n        ORDER BY\n            week_day ASC,\n            start_time ASC\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "course_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 2,
+        "name": "block_type",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "week_day",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 4,
+        "name": "start_time",
+        "type_info": "Time"
+      },
+      {
+        "ordinal": 5,
+        "name": "end_time",
+        "type_info": "Time"
+      },
+      {
+        "ordinal": 6,
+        "name": "location",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "68480f8ec498e6f965a3c3320ab5ccac76d441987cd88ba760a5835153de6ec0"
+}

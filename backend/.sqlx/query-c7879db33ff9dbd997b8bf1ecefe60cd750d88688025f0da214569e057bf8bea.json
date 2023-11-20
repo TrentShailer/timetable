@@ -1,0 +1,59 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        DELETE FROM blocks\n        WHERE id = $1 AND user_id = $2\n        RETURNING id, course_id, block_type, week_day, start_time, end_time, location\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "course_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 2,
+        "name": "block_type",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "week_day",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 4,
+        "name": "start_time",
+        "type_info": "Time"
+      },
+      {
+        "ordinal": 5,
+        "name": "end_time",
+        "type_info": "Time"
+      },
+      {
+        "ordinal": 6,
+        "name": "location",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "c7879db33ff9dbd997b8bf1ecefe60cd750d88688025f0da214569e057bf8bea"
+}

@@ -1,0 +1,22 @@
+services:
+  server:
+    image: trentshailer/timetable-backend:latest
+    env_file:
+      - ./.env
+    ports:
+      - 4004:8080
+    depends_on:
+      - database
+    restart: unless-stopped
+  database:
+    image: postgres:16
+    env_file:
+      - ./database.env
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+volumes:
+  postgres-data:
