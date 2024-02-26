@@ -70,7 +70,7 @@ export default function EditBlock({ block, course, refreshData }: Props) {
 		setStartTimeError("");
 		setEndTime(block.end_time.substring(0, 5));
 		setEndTimeError("");
-		setNotes("");
+		setNotes(block.notes === null ? "" : block.notes);
 
 		onClose();
 	};
