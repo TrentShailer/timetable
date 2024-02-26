@@ -92,9 +92,9 @@ export default function NewTimeblock({ course, refreshData }: Props) {
 			setBlockLocationError("Location must contain at least one number or letter.");
 		}
 
-		if (blockLocation.length > 10) {
+		if (blockLocation.length > 16) {
 			allValid = false;
-			setBlockLocationError("Location must at most 10 characters.");
+			setBlockLocationError("Location must at most 16 characters.");
 		}
 
 		if (blockType === "") {
