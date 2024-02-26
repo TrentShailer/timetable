@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT id, course_id, block_type, week_day, start_time, end_time, location\n        FROM blocks\n        WHERE user_id = $1\n        ORDER BY\n            week_day ASC,\n            start_time ASC\n        ",
+  "query": "\n        INSERT INTO blocks (user_id, course_id, block_type, week_day, start_time, end_time, location, notes)\n        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)\n        RETURNING id, course_id, block_type, week_day, start_time, end_time, location, notes\n        ",
   "describe": {
     "columns": [
       {
@@ -37,11 +37,23 @@
         "ordinal": 6,
         "name": "location",
         "type_info": "Varchar"
+      },
+      {
+        "ordinal": 7,
+        "name": "notes",
+        "type_info": "Varchar"
       }
     ],
     "parameters": {
       "Left": [
-        "Uuid"
+        "Uuid",
+        "Uuid",
+        "Varchar",
+        "Int2",
+        "Time",
+        "Time",
+        "Varchar",
+        "Varchar"
       ]
     },
     "nullable": [
@@ -51,8 +63,9 @@
       false,
       false,
       false,
-      false
+      false,
+      true
     ]
   },
-  "hash": "68480f8ec498e6f965a3c3320ab5ccac76d441987cd88ba760a5835153de6ec0"
+  "hash": "e4d51ade48e446c780845dbd6e76a3aa6e398cb4b0b7809c8e988a7e6ad20c58"
 }

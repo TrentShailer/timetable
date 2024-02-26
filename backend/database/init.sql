@@ -27,5 +27,6 @@ create table if not exists blocks (
     week_day   SMALLINT not null,
     start_time TIME     not null,
     end_time   TIME     not null,
-    location   VARCHAR  not null
+    location   VARCHAR  not null,
+	notes	   VARCHAR
 );

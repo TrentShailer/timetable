@@ -28,4 +28,5 @@ pub struct Block {
     pub start_time: chrono::NaiveTime,
     pub end_time: chrono::NaiveTime,
     pub location: String,
+    pub notes: Option<String>,
 }

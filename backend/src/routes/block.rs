@@ -53,6 +53,7 @@ pub struct PostBody {
     start_time: chrono::NaiveTime,
     end_time: chrono::NaiveTime,
     location: String,
+    notes: Option<String>,
 }
 
 pub async fn route_post_block(
@@ -75,6 +76,7 @@ pub async fn route_post_block(
         &body.start_time,
         &body.end_time,
         &body.location,
+        &body.notes,
     )
     .await?;
 
@@ -89,6 +91,7 @@ pub struct PutBody {
     start_time: chrono::NaiveTime,
     end_time: chrono::NaiveTime,
     location: String,
+    notes: Option<String>,
 }
 
 pub async fn route_put_block(
@@ -112,6 +115,7 @@ pub async fn route_put_block(
         &body.start_time,
         &body.end_time,
         &body.location,
+        &body.notes,
     )
     .await?;
 

@@ -24,13 +24,14 @@ pub async fn create_block(
     start_time: &NaiveTime,
     end_time: &NaiveTime,
     location: &String,
+    notes: &Option<String>,
 ) -> Result<Block, QueryError> {
     let block = sqlx::query_as!(
         Block,
         r#"
-        INSERT INTO blocks (user_id, course_id, block_type, week_day, start_time, end_time, location)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING id, course_id, block_type, week_day, start_time, end_time, location
+        INSERT INTO blocks (user_id, course_id, block_type, week_day, start_time, end_time, location, notes)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        RETURNING id, course_id, block_type, week_day, start_time, end_time, location, notes
         "#,
         user_id,
         course_id,
@@ -39,6 +40,7 @@ pub async fn create_block(
         start_time,
         end_time,
         location,
+		notes.as_ref()
     )
     .fetch_one(pool)
     .await?;
@@ -56,14 +58,15 @@ pub async fn update_block(
     start_time: &NaiveTime,
     end_time: &NaiveTime,
     location: &String,
+    notes: &Option<String>,
 ) -> Result<Option<Block>, QueryError> {
     let block = sqlx::query_as!(
         Block,
         r#"
         UPDATE blocks
-        SET course_id = $3, block_type = $4, week_day = $5, start_time = $6, end_time = $7, location = $8
+        SET course_id = $3, block_type = $4, week_day = $5, start_time = $6, end_time = $7, location = $8, notes = $9
         WHERE id = $1 AND user_id = $2
-        RETURNING id, course_id, block_type, week_day, start_time, end_time, location
+        RETURNING id, course_id, block_type, week_day, start_time, end_time, location, notes
         "#,
         id,
         user_id,
@@ -72,7 +75,8 @@ pub async fn update_block(
         day,
         start_time,
         end_time,
-        location
+        location,
+		notes.as_ref()
     )
     .fetch_optional(pool)
     .await?;
@@ -98,7 +102,7 @@ pub async fn get_block(
     let block = sqlx::query_as!(
         Block,
         r#"
-        SELECT id, course_id, block_type, week_day, start_time, end_time, location
+        SELECT id, course_id, block_type, week_day, start_time, end_time, location, notes
         FROM blocks
         WHERE id = $1 AND user_id = $2
         "#,
@@ -130,7 +134,7 @@ pub async fn delete_block(
         r#"
         DELETE FROM blocks
         WHERE id = $1 AND user_id = $2
-        RETURNING id, course_id, block_type, week_day, start_time, end_time, location
+        RETURNING id, course_id, block_type, week_day, start_time, end_time, location, notes
         "#,
         id,
         user_id
@@ -154,7 +158,7 @@ pub async fn get_all_blocks(pool: &PgPool, user_id: &Uuid) -> Result<Vec<Block>,
     let blocks = sqlx::query_as!(
         Block,
         r#"
-        SELECT id, course_id, block_type, week_day, start_time, end_time, location
+        SELECT id, course_id, block_type, week_day, start_time, end_time, location, notes
         FROM blocks
         WHERE user_id = $1
         ORDER BY
@@ -179,7 +183,7 @@ pub async fn clone_blocks(
     let origin_blocks = sqlx::query_as!(
         Block,
         r#"
-        SELECT id, course_id, block_type, week_day, start_time, end_time, location
+        SELECT id, course_id, block_type, week_day, start_time, end_time, location, notes
         FROM blocks
         WHERE course_id = $1
         "#,
@@ -201,6 +205,7 @@ pub async fn clone_blocks(
             &origin_block.start_time,
             &origin_block.end_time,
             &origin_block.location,
+            &origin_block.notes,
         )
         .await?;
         blocks.push(new_block);

@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        UPDATE blocks\n        SET course_id = $3, block_type = $4, week_day = $5, start_time = $6, end_time = $7, location = $8\n        WHERE id = $1 AND user_id = $2\n        RETURNING id, course_id, block_type, week_day, start_time, end_time, location\n        ",
+  "query": "\n        SELECT id, course_id, block_type, week_day, start_time, end_time, location, notes\n        FROM blocks\n        WHERE user_id = $1\n        ORDER BY\n            week_day ASC,\n            start_time ASC\n        ",
   "describe": {
     "columns": [
       {
@@ -37,18 +37,16 @@
         "ordinal": 6,
         "name": "location",
         "type_info": "Varchar"
+      },
+      {
+        "ordinal": 7,
+        "name": "notes",
+        "type_info": "Varchar"
       }
     ],
     "parameters": {
       "Left": [
-        "Uuid",
-        "Uuid",
-        "Uuid",
-        "Varchar",
-        "Int2",
-        "Time",
-        "Time",
-        "Varchar"
+        "Uuid"
       ]
     },
     "nullable": [
@@ -58,8 +56,9 @@
       false,
       false,
       false,
-      false
+      false,
+      true
     ]
   },
-  "hash": "30c16b5c22cde8d9e03ce0ef88c410be5e4b070d622a66bc6604cc16d7f3ef8f"
+  "hash": "126341d7038f7d6be52cd9459e392f664e6f37ed4c7360b5bf8bf83ed01a8089"
 }
