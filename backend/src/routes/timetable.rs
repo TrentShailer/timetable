@@ -78,8 +78,11 @@ fn compute_block_columns(blocks: &[Block]) -> HashMap<Uuid, u8> {
                     return None;
                 }
 
-                if block.start_time.cmp(&other.start_time) == Ordering::Greater
-                    && block.start_time.cmp(&other.end_time) == Ordering::Less
+                let start_cmp = block.start_time.cmp(&other.start_time);
+                let end_cmp = block.start_time.cmp(&other.end_time);
+
+                if (start_cmp == Ordering::Greater || start_cmp == Ordering::Equal)
+                    && (end_cmp == Ordering::Less)
                 {
                     return Some(other.id);
                 }
