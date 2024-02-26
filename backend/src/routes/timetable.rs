@@ -129,6 +129,14 @@ fn compute_columns(
     let taken_columns: Vec<u8> = clashes
         .iter()
         .map(|clash| {
+            // fix issue with clash with eachother,
+            // if two blocks clash with eachother, then resolve it by ignoring one of the blocks and let it work itself out
+            if clash_map.get(clash).unwrap().contains(&block.id)
+                && !block_columns.contains_key(clash)
+            {
+                return u8::MAX;
+            }
+
             compute_columns(
                 block_map.get(clash).unwrap(),
                 block_map,
