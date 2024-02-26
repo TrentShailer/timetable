@@ -15,7 +15,6 @@ import { get_error_description, handle_401 } from "../utils/errors";
 import { useLocation } from "wouter";
 import Manage from "./home/Manage";
 import { IoRefresh } from "react-icons/io5";
-import dayjs from "dayjs";
 
 export default function Home() {
     const toast = useToast();

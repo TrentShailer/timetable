@@ -40,7 +40,7 @@ export default function BlockDisplay({ block, course, column }: Props) {
         <Card
             top={`${top}%`}
             left={75 + 150 * column}
-            // right={}
+            overflowY={"auto"}
             p={2}
             pt={0}
             pb={0}
@@ -57,7 +57,7 @@ export default function BlockDisplay({ block, course, column }: Props) {
             }}
         >
             <HStack align="start" h="100%">
-                <VStack gap={0} w="100%" align="start">
+                <VStack gap={0} w="100%" align="start" flexGrow={2}>
                     <Heading fontSize="sm">
                         {course.name} {block.block_type}
                         {block.notes !== null ? "*" : null}
@@ -70,6 +70,7 @@ export default function BlockDisplay({ block, course, column }: Props) {
                     justify="space-between"
                     h="100%"
                     align="end"
+                    flexShrink={2}
                 >
                     <Text fontSize="sm">
                         {dayjs(block.start_time, "HH:mm:ss").format("h:mma")}

@@ -3,7 +3,6 @@ import { Card, Flex, TabPanel } from "@chakra-ui/react";
 import BlockDisplay from "./Day/BlockDisplay";
 import TimetableGrid from "./Day/TimetableGrid";
 import CurrentTime from "./Day/CurrentTime";
-import dayjs from "dayjs";
 
 type Props = {
     week_day: number;
