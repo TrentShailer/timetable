@@ -67,8 +67,8 @@ function App() {
     }, [location, user, setLocation, loading]);
 
     return (
-        <VStack gap={0} h="100vh" w="100vw">
-            <Box pb={2} h="calc(100% - 60px)" w="100%">
+        <VStack gap={0} h="100vh" w="100vw" overflowY="auto">
+            <Box pb={2} /* h="calc(100% - 60px)" */ h="100%" w="100%">
                 {loading ? null : (
                     <Switch>
                         <Route path="/" component={Landing} />
@@ -80,7 +80,7 @@ function App() {
                     </Switch>
                 )}
             </Box>
-            <Footer />
+            {/* <Footer /> */}
         </VStack>
     );
 }
