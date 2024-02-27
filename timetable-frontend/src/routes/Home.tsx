@@ -85,7 +85,7 @@ export default function Home() {
                     aria-label={"Refresh timetable"}
                 />
             </Header>
-            <Container h="calc(100% - 60px)" pt={2} maxW="4xl">
+            <Container overflowY="auto" h="calc(100% - 60px)" pt={2} maxW="4xl">
                 {managing ? (
                     <Manage
                         loading={loading}
