@@ -1,6 +1,6 @@
 import { Box, VStack, useToast } from "@chakra-ui/react";
 import Landing from "./routes/Landing";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import Home from "./routes/Home";
 import { Route, Switch, Redirect, useLocation } from "wouter";
 import Account from "./routes/Account";
