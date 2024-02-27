@@ -46,10 +46,10 @@ export default function Day({
         >
             <Card
                 ml={`max(calc(50% - ${
-                    (60 + 155 * (maxColumn + 1)) / 2
+                    (75 + 150 * (maxColumn + 1)) / 2
                 }px), 0px)`}
                 h="100%"
-                w={60 + 155 * (maxColumn + 1)}
+                w={75 + 150 * (maxColumn + 1)}
             >
                 <TimetableGrid />
 
