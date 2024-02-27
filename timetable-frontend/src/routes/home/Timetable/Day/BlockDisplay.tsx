@@ -39,13 +39,13 @@ export default function BlockDisplay({ block, course, column }: Props) {
     return (
         <Card
             top={`${top}%`}
-            left={75 + 150 * column}
+            left={75 + 225 * column}
             overflowY={"auto"}
             p={2}
             pt={0}
             pb={0}
             pos="absolute"
-            w={150}
+            w={225}
             h={`${height}%`}
             bg="gray.600"
             style={{
