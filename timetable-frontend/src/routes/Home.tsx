@@ -1,13 +1,5 @@
-import {
-    Button,
-    Container,
-    Icon,
-    IconButton,
-    VStack,
-    useToast,
-} from "@chakra-ui/react";
+import { Box, Button, Icon, IconButton, useToast } from "@chakra-ui/react";
 import Header from "../components/Header";
-import Timetable from "./home/Timetable";
 import { useCallback, useEffect, useState } from "react";
 import { Block, Course } from "../utils/types";
 import axios from "axios";
@@ -15,6 +7,7 @@ import { get_error_description, handle_401 } from "../utils/errors";
 import { useLocation } from "wouter";
 import Manage from "./home/Manage";
 import { IoRefresh } from "react-icons/io5";
+import NewTimetable from "./home/NewTimetable";
 
 export default function Home() {
     const toast = useToast();
@@ -73,7 +66,7 @@ export default function Home() {
     }, [fetch_data]);
 
     return (
-        <VStack gap={0} h="100%" w="100%">
+        <>
             <Header>
                 <Button mr={2} size="sm" onClick={() => setManaging(!managing)}>
                     {managing ? "Return to Timetable" : "Manage Courses"}
@@ -85,7 +78,7 @@ export default function Home() {
                     aria-label={"Refresh timetable"}
                 />
             </Header>
-            <Container overflowY="auto" h="calc(100% - 60px)" pt={2} maxW="4xl">
+            <Box p={2}>
                 {managing ? (
                     <Manage
                         loading={loading}
@@ -94,14 +87,14 @@ export default function Home() {
                         refreshData={fetch_data}
                     />
                 ) : (
-                    <Timetable
+                    <NewTimetable
                         loading={loading}
                         blocks={blocks}
                         courses={courses}
                         blockColumns={blockColumns}
                     />
                 )}
-            </Container>
-        </VStack>
+            </Box>
+        </>
     );
 }

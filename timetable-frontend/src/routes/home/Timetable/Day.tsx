@@ -40,7 +40,7 @@ export default function Day({
             p={0}
             pt={2}
             overflowX="auto"
-            h="100%"
+            h="1000px"
             maxW="100vw"
             tabIndex={week_day}
         >
